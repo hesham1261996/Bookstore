@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
 use App\Models\Category;
 use App\Http\Controllers\PublishersConrller;
+use App\Models\Book;
 use App\Models\Publisher;
 use Illuminate\Support\Facades\Route;
 
@@ -53,4 +54,7 @@ Route::get('/authors',[AuthorsController::class , 'list'])->name('gellery.author
 Route::get('/authors/{author}' , [AuthorsController::class , 'result'])->name('gallery.author.show');
 Route::get('/author/search' , [AuthorsController::class , 'search'])->name('gallery.author.search');
 
-Route::get('/admin', [AdminsController::class , 'index'] )->name('admin.index');
+Route::get('/admin', [AdminsController::class , 'index'] )->name('admin.index')->middleware('auth');
+Route::get('/admin/book' ,[BooksController::class , 'index' ])->name('book.index')->middleware('auth');
+
+Route::resource('admin/book', BooksController::class)->middleware('auth');

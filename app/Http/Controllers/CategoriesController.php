@@ -65,7 +65,8 @@ class CategoriesController extends Controller
     public function result(Category $category){
         $books = $category->books()->paginate(12);
         $title = " الكتب الخاصه بتصنيف :".$category->name ; 
-        return view('gallery' , compact(['books' , 'title']));
+        $category =  Category::all();
+        return view('gallery' , compact(['category', 'books' , 'title']));
     }
 
     public function list(){

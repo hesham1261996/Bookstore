@@ -1,5 +1,20 @@
-@extends('layouts.main')
+@extends('theme.default')
 
+
+@section('heading')
+{{__('عرض تفاصيل الكتاب')}}
+@endsection
+
+@section('head')
+    <style>
+        table{
+            table-layout: fixed ; 
+        }
+        table tr th {
+            width: 30% ;
+        }
+    </style>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center ">
@@ -22,7 +37,7 @@
                     <tr>
                         <th>{{__('الغلاف')}}</th>
                         <td>
-                            <img src="{{asset($book->cover_image)}}" alt="">
+                            <img src="{{asset("storage/$book->cover_image")}}" alt="">
                         </td>
                     </tr>
                     @if ($book->category)
@@ -33,9 +48,9 @@
                         <tr>
                             <th>{{$book->authors->count() < 0 ? __('المؤلفون') : __('المؤلف')}}</th>
                             <td>
-                                @foreach ($book->authors as $author)
+                                @foreach ($book->authors as $auther)
                                     {{$loop->first ? '' : 'و'}}
-                                    {{$author->name}}
+                                    {{$auther->name}}
                                 @endforeach
                             </td>
                         </tr>
@@ -61,6 +76,7 @@
                             <td>{{$book->number_of_pages}}</td>
                         </tr>
                 </table>
+                <a href="{{route('book.edit' , $book)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>{{__('تعديل')}}</a>
             </div>
         </div>
     </div>

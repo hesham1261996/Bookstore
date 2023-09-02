@@ -1,6 +1,6 @@
 @extends('theme.default')
 
-@section('heder')
+@section('heading')
     {{ __('لوحه التحكم') }}
 @endsection
 

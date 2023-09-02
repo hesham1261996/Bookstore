@@ -30,7 +30,7 @@
                                     <div class="card">
                                         <div class="card mb-3">
                                             <div class="card-img-actions">
-                                                <img src="{{asset($book->cover_image)}}"
+                                                <img src="{{asset("/storage/$book->cover_image")}}"
                                                     class="card-img img-fluid" width="96" height="350" alt="">
                                             </div>
                                         </div>
@@ -39,7 +39,7 @@
                                                 <h6 class="font-weight-semibold card-title mb-2">
                                                     <a href="{{route('book.details', $book)}}" class="text-default card-body mb-0" data-abc="true">{{$book->title}}</a>
                                                 </h6>
-                                                <a href="{{route('category.books.show' , $book->category)}}" class="text-muted" data-abc="true">
+                                                <a href="{{route('category.books.show' , $book->category )}}" class="text-muted" data-abc="true">
                                                     @if ($book->category != null)
                                                         {{$book->category->name}}
                                                     @endif
