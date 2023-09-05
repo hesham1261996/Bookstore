@@ -56,4 +56,5 @@ Route::get('/admin/book' ,[BooksController::class , 'index' ])->name('book.index
 
 Route::resource('admin/book', BooksController::class)->middleware('auth');
 Route::resource('admin/categories', CategoriesController::class)->middleware('auth');
-Route::resource('admin/author', AuthorsController::class)->middleware('auth');
+Route::resource('admin/authors', AuthorsController::class)->middleware('auth');
+Route::resource('admin/publishers' , PublishersConrller::class)->middleware('auth');

@@ -12,8 +12,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        $author = Author::paginate(12);
-        return view('admin.authors.index' , compact('author'));
+        $authors = Author::paginate(10);
+        return view('admin.authors.index' , compact('authors'));
     }
 
     /**
@@ -29,7 +29,15 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vilidate = request()->validate([
+            'name' => 'required',
+            'description' => 'nullable'
+        ]);
+
+        Author::create($vilidate);
+        session()->flash('flash_message' , 'تم اضافه المؤلف');
+        return redirect()->route('authors.index');
+
     }
 
     /**
@@ -45,7 +53,7 @@ class AuthorsController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('admin.authors.edit' , compact('author'));
     }
 
     /**
@@ -53,7 +61,14 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $vilidate = request()->validate([
+            'name' => 'required',
+            'description' => 'nullable'
+        ]);
+
+        Author::update($vilidate);
+        session()->flash('flash_message' , 'تم تعديل المؤلف');
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -61,7 +76,9 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        session()->flash('flash_message' , 'تم حذف المؤلف');
+        return redirect()->route('authors.index');
     }
     public function list()
     {

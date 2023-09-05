@@ -23,7 +23,7 @@
 
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {{ request()->is('admin/books*') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->is('admin/book') ? 'active' : '' }}">
             <a class="nav-link text-right" href="{{route('book.index')}}">
                 <i class="fas fa-book-open"></i>
                 <span>الكتب</span>
@@ -31,7 +31,7 @@
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->is('admin/categories') ? 'active' : '' }}">
             <a class="nav-link text-right" href="{{route('categories.index')}}">
                 <i class="fas fa-folder"></i>
                 <span>التصنيفات</span>
@@ -39,15 +39,15 @@
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {{ request()->is('admin/authors*') ? 'active' : '' }}">
-            <a class="nav-link text-right" href="">
+        <li class="nav-item {{ request()->is('admin/authors') ? 'active' : '' }}">
+            <a class="nav-link text-right" href="{{route('authors.index')}}">
                 <i class="fas fa-pen-fancy"></i>
                 <span>المؤلفون</span>
             </a>
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item {{ request()->is('admin/publishers*') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->is('admin/publishers') ? 'active' : '' }}">
             <a class="nav-link text-right" href="#">
                 <i class="fas fa-table"></i>
                 <span>الناشرون</span></a>
