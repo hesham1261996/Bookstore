@@ -77,6 +77,11 @@
                         </tr>
                 </table>
                 <a href="{{route('book.edit' , $book)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>{{__('تعديل')}}</a>
+                <form action="{{route('book.destroy' , $book)}}" method="post" class="d-inline-block">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل انت متاكد؟')"><i class="fa fa-trash"></i>{{__('حذف')}}</button>
+                </form>
             </div>
         </div>
     </div>

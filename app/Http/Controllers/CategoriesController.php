@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -12,7 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.categories.index' , compact('categories'));
     }
 
     /**
@@ -20,7 +22,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -28,7 +30,17 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = request()->validate([
+            'name' => 'required',
+            'description' => 'nullable' 
+        ]);
+        
+        Category::create($date);
+
+        session()->flash('flash_message' , 'تم اضافه التصنيف');
+
+        return redirect()->route('categories.index');
+        
     }
 
     /**
@@ -36,7 +48,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.show' , compact('category'));
     }
 
     /**
@@ -44,7 +56,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit' , compact('category'));
     }
 
     /**
@@ -52,7 +64,15 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $date = request()->validate([
+            'name' => 'required',
+            'description' =>'nullable'
+        ]);
+
+        if($category->update($date)){
+            session()->flash('flash_message' , 'تم تعديل التصنيف');
+            return redirect()->route('categories.index');
+        }
     }
 
     /**
@@ -60,7 +80,9 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
+
     }
     public function result(Category $category){
         $books = $category->books()->paginate(12);

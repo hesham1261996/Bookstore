@@ -5,10 +5,7 @@ use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
-use App\Models\Category;
 use App\Http\Controllers\PublishersConrller;
-use App\Models\Book;
-use App\Models\Publisher;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,3 +55,5 @@ Route::get('/admin', [AdminsController::class , 'index'] )->name('admin.index')-
 Route::get('/admin/book' ,[BooksController::class , 'index' ])->name('book.index')->middleware('auth');
 
 Route::resource('admin/book', BooksController::class)->middleware('auth');
+Route::resource('admin/categories', CategoriesController::class)->middleware('auth');
+Route::resource('admin/author', AuthorsController::class)->middleware('auth');

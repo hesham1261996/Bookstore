@@ -12,7 +12,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        //
+        $author = Author::paginate(12);
+        return view('admin.authors.index' , compact('author'));
     }
 
     /**
@@ -20,7 +21,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.authors.create');
     }
 
     /**
