@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Publisher;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Expr\FuncCall;
@@ -159,5 +160,21 @@ class BooksController extends Controller
     public function details(Book $book){
         $title = $book->title ;
         return view('books.details' ,compact('book' , 'title'));
+    }
+
+    public function rate(Request $request , Book $book){
+        if (auth()->user()->rated($book)) {
+            $rating = Rating::where(['user_id' => auth()->user()->id , 'book_id' => $book->id])->first();
+            $rating->value = $request->value ;
+            $rating->save();
+        } else {
+            $rating = new Rating ;
+            $rating->user_id = auth()->user()->id  ;
+            $rating->book_id = $book->id ;
+            $rating->value = $request->value ;
+            $rating->save();
+        }
+        return back() ;
+        
     }
 }

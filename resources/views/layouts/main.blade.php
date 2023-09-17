@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <title>{{$title}}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -16,12 +19,71 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         body {
             font-family: 'Cairo', sans-serif;
             /* font-family: 'IBM Plex Sans Arabic', sans-serif; */
             background: "#f0f0f0";
+        }
+        .score{
+            display: block ;
+            font-size: 16px ; 
+            position: relative;
+            overflow: hidden ;
+        }
+        .score-wrap {
+            display: inline-block;
+            position: relative;
+            height: 19px;
+        }
+        .score .stars-active {
+            color: #FFCA00 ;
+            position: relative;
+            z-index: 10; 
+            display: block ; 
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .score .stars-inactive {
+            color: lightgray ; 
+            position: absolute ;
+            top: 0 ;
+            left: 0 ;
+        }
+        .rating {
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+        }
+        .rating-star {
+            padding: 0 5px;
+            margin: 0;
+            cursor: pointer;
+            display: block;
+            float: left;
+        }
+        .rating-star:after {
+            position: relative;
+            font-family: "Font Awesome 5 Free";
+            content: '\f005';
+            color: lightgrey;
+        }
+        .rating-star.checked ~ .rating-star:after,
+        .rating-star.checked:after {
+            content: '\f005';
+            color: #FFCA00;
+        }
+        .rating:hover .rating-star:after {
+            content: '\f005';
+            color: lightgrey;
+        }
+        .rating-star:hover ~ .rating-star:after,
+        .rating .rating-star:hover:after {
+            content: '\f005';
+            color: #FFCA00;
         }
     </style>
     @yield('head')
@@ -95,6 +157,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if (Auth::user()->isAdmin())
+                                        <x-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('profile.show')">
+                                            {{ __('لوحه التحكم') }}
+                                        </x-responsive-nav-link>
+                                        @endif
 
                                         <div class="mt-3 space-y-1">
                                             <!-- Account Management -->
@@ -179,6 +246,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     @yield('script')
 </body>
 
