@@ -102,21 +102,27 @@
                 </table>
                 @auth
                     <h4>{{__('قيم هذا الكتاب')}}</h4>
-                    @if(auth()->user()->rated($book))
-                        <div class="rating">
-                            <span class="rating-star" {{auth()->user()->bookRating($book)->value == 5 ? 'checked' : ''}} data-value="5"></span>
-                            <span class="rating-star" {{auth()->user()->bookRating($book)->value == 4 ? 'checked' : ''}} data-value="4"></span>
-                            <span class="rating-star" {{auth()->user()->bookRating($book)->value == 3 ? 'checked' : ''}} data-value="3"></span>
-                            <span class="rating-star" {{auth()->user()->bookRating($book)->value == 2 ? 'checked' : ''}} data-value="2"></span>
-                            <span class="rating-star" {{auth()->user()->bookRating($book)->value == 1 ? 'checked' : ''}} data-value="1"></span>
-                        </div>
+                    @if($bookfind)
+                        @if(auth()->user()->rated($book))
+                            <div class="rating">
+                                <span class="rating-star" {{auth()->user()->bookRating($book)->value == 5 ? 'checked' : ''}} data-value="5"></span>
+                                <span class="rating-star" {{auth()->user()->bookRating($book)->value == 4 ? 'checked' : ''}} data-value="4"></span>
+                                <span class="rating-star" {{auth()->user()->bookRating($book)->value == 3 ? 'checked' : ''}} data-value="3"></span>
+                                <span class="rating-star" {{auth()->user()->bookRating($book)->value == 2 ? 'checked' : ''}} data-value="2"></span>
+                                <span class="rating-star" {{auth()->user()->bookRating($book)->value == 1 ? 'checked' : ''}} data-value="1"></span>
+                            </div>
+                        @else
+                            <div class="rating">
+                                <span class="rating-star" data-value="5"></span>
+                                <span class="rating-star" data-value="4"></span>
+                                <span class="rating-star" data-value="3"></span>
+                                <span class="rating-star" data-value="2"></span>
+                                <span class="rating-star" data-value="1"></span>
+                            </div>
+                        @endif
                     @else
-                        <div class="rating">
-                            <span class="rating-star" data-value="5"></span>
-                            <span class="rating-star" data-value="4"></span>
-                            <span class="rating-star" data-value="3"></span>
-                            <span class="rating-star" data-value="2"></span>
-                            <span class="rating-star" data-value="1"></span>
+                        <div class="alert alert-danger mr-4">
+                            {{__('يجب ان تشتري الكتاب لتستطيع تقييمه')}}
                         </div>
                     @endif
                 @endauth

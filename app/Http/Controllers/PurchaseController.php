@@ -66,4 +66,9 @@ class PurchaseController extends Controller
         }
         return redirect('/cart')->with('success', 'تم شراء المنتج بنجاح');
     }
+    public function myProduct(){
+        $mybooks = auth()->user()->purchesProduct;
+        $title = __('مشترياتي');
+        return view('books.myproduct' , compact('mybooks' , 'title'));
+    }
 }

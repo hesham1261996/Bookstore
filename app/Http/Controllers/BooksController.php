@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Expr\FuncCall;
 use App\Traits\ImageUploadTrait ;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
@@ -159,7 +160,11 @@ class BooksController extends Controller
 
     public function details(Book $book){
         $title = $book->title ;
-        return view('books.details' ,compact('book' , 'title'));
+        $bookfind = 0 ;
+        if(Auth::check()){
+            $bookfind = auth()->user()->ratedpurches()->where('book_id' , $book->id)->first();
+        }
+        return view('books.details' ,compact('book' , 'title' , 'bookfind'));
     }
 
     public function rate(Request $request , Book $book){

@@ -75,3 +75,5 @@ Route::post('/carts/{book}' , [CartController::class , 'removeAll'])->name('cart
 Route::get('/checkout' , [PurchaseController::class , 'CreditCheckout'])->name('credit.checkout');
 Route::post('/checkout' , [PurchaseController::class , 'purchase'])->name('products.purchase');
 
+Route::get('myproducts' , [PurchaseController::class , 'myProduct'])->name('my.product');
+

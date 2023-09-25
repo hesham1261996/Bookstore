@@ -138,10 +138,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                {{ __('مشترياتي') }}
-                                <i class="fa fa-shopping-cart"></i>
-                            </a>
+                            @auth
+                                <a href="{{route('my.product')}}" class="nav-link">
+                                    {{ __('مشترياتي') }}
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
+                            @endauth
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-auto">
