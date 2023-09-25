@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Rating;
 use App\Models\Book;
+use Laravel\Cashier\Billable;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -18,6 +19,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -78,5 +80,9 @@ class User extends Authenticatable
 
     public function bookRating(Book $book){
         return $this->rated($book) ? $this->ratings->where('book_id' , $book->id)->first() : null ;
+    }
+
+    public function bookInCart(){
+        return $this->belongsToMany(Book::class)->withPivot(['number_of_copies' , 'bought' , 'price'])->wherePivot('bought' , false);
     }
 }

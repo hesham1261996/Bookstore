@@ -9,6 +9,17 @@
             </div>
             <div class="card-body ">
                 <table class="table table-stribed">
+                    @auth
+                        <div class="form text-center md-2">
+                            <input id="bookId" type="hidden" value="{{$book->id}}">
+                            <span class="text-muted md-3"><input id="quantity"
+                            name="quantity" type="number" value="1" min="1" 
+                            max="{{$book->number_of_copies}}" style="width: 10%"
+                            class="form-control d-inline mx-auto"></span>
+                            <button type="submit" class="btn bg-cart addCart me-2"><i class="fa fa-cart-plus"></i>{{__('اضف للسله')}}</button>
+
+                        </div>
+                    @endauth
                     <tr>
                         <th>{{__('العنوان')}}</th>
                         <td class="lead">{{$book->title}}</td>
@@ -136,6 +147,35 @@
                     alert('حدث خطأ ما');
                 },
             });
+        });
+    </script>
+    <script>
+        $('.addCart').on('click' ,function(event){
+            var token = '{{ Session::token() }}' ;
+            var url = "{{route('cart.add')}}"
+
+            event.preventDefault();
+
+            var bookId = $(this).parents(".form").find("#bookId").val()
+            var quantity = $(this).parents(".form").find("#quantity").val()
+            
+            $.ajax({
+                method: 'POST',
+                url: url ,
+                data: {
+                    quantity: quantity,
+                    id: bookId,
+                    _token: token
+                    
+                },
+                success : function(data){
+                    $('span.badge').text(data.num_of_product);
+                    toastr.success('تم اضافه الكتاب بنجاح')
+                },
+                error: function(){
+                    alert('حدث خطأ ما')
+                }
+            })
         });
     </script>
 @endsection

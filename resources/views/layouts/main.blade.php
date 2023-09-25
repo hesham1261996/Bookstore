@@ -27,6 +27,10 @@
             /* font-family: 'IBM Plex Sans Arabic', sans-serif; */
             background: "#f0f0f0";
         }
+        .bg-cart {
+            background-color: #FFCA00 ;
+            color: #fff
+        }
         .score{
             display: block ;
             font-size: 16px ; 
@@ -102,6 +106,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav  mx-auto">
+                        @auth
+                            <li class="nav-item">
+                                <a href="{{route('cart.view')}}" class="nav-link">
+                                    @if (Auth::user()->bookInCart()->count() > 0)
+                                        <span class="badge bg-secondary">{{Auth::user()->bookInCart()->count()}}</span>
+                                    @else
+                                        <span class="badge bg-secondary">0</span>
+                                    @endif
+                                        {{__('العربه')}}
+                                        <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </li>
+                        @endauth
                         <li class="nav-item">
                             <a href="{{route('all_categories')}}" class="nav-link">
                                 {{ __('التصنيفات') }}

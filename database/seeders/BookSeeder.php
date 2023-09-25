@@ -31,7 +31,7 @@ class BookSeeder extends Seeder
             'price'             =>'23',
             'cover_image'       => 'images/covers/1.png' ,
         ]);
-        $book1->authers()->attach(Author::where('name' , 'اسامه محمد')->first());
+        $book1->authors()->attach(Author::where('name' , 'اسامه محمد')->first());
 
         $book1 = Book::create([
             'category_id'       => Category::where('name','التصميم')->first()->id,
@@ -45,7 +45,7 @@ class BookSeeder extends Seeder
             'price'             =>'23',
             'cover_image'       => 'images/covers/2.png' ,
         ]);
-        $book1->authers()->attach(Author::where('name' , 'مصطفي محمحد')->first());
+    $book1->authors()->attach(Author::where('name' , 'مصطفي محمحد')->first());
 
         $book1 = Book::create([
             'category_id'       => Category::where('name', 'التسويق والمبيعات')->first()->id,
@@ -59,7 +59,7 @@ class BookSeeder extends Seeder
             'price'             =>'23',
             'cover_image'       => 'images/covers/3.png' ,
         ]);
-        $book1->authers()->attach(Author::where('name' , 'محمود خالد')->first());
+        $book1->authors()->attach(Author::where('name' , 'محمود خالد')->first());
 
         $book1 = Book::create([
             'category_id'       => Category::where('name','العمل الحر')->first()->id,
@@ -73,7 +73,7 @@ class BookSeeder extends Seeder
             'price'             =>'23',
             'cover_image'       => 'images/covers/4.png' ,
         ]);
-        $book1->authers()->attach(Author::where('name' , 'خالد محمد')->first());
+        $book1->authors()->attach(Author::where('name' , 'خالد محمد')->first());
 
         $book1 = Book::create([
             'category_id'       => Category::where('name', 'التسويق والمبيعات')->first()->id,
@@ -87,6 +87,6 @@ class BookSeeder extends Seeder
             'price'             =>'23',
             'cover_image'       => 'images/covers/1.png' ,
         ]);
-        $book1->authers()->attach(Author::where('name' , 'يوسف محمد')->first());
+        $book1->authors()->attach(Author::where('name' , 'يوسف محمد')->first());
     }
 }

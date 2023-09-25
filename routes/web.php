@@ -3,10 +3,13 @@
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublishersConrller;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UsersController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,3 +66,12 @@ Route::prefix('/admin')->middleware('can:update-book')->group(function(){
     Route::resource('/publishers' , PublishersConrller::class);
     Route::resource('/users' , UsersController::class)->middleware('can:update-user');
 });
+
+Route::post('/cart' ,[CartController::class , 'addTocart'] )->name('cart.add');
+Route::get('/cart' , [CartController::class , 'veiwCart'])->name('cart.view');
+Route::post('/cart/{book}' , [CartController::class , 'removeOne'])->name('cart.removeOne');
+Route::post('/carts/{book}' , [CartController::class , 'removeAll'])->name('cart.remaveAll');
+
+Route::get('/checkout' , [PurchaseController::class , 'CreditCheckout'])->name('credit.checkout');
+Route::post('/checkout' , [PurchaseController::class , 'purchase'])->name('products.purchase');
+
