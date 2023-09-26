@@ -46,18 +46,24 @@
             </a>
         </li>
 
-        <!-- Nav Item - Charts -->
+        <!-- Nav Item - publishers -->
         <li class="nav-item {{ request()->is('admin/publishers') ? 'active' : '' }}">
             <a class="nav-link text-right" href="{{route('publishers.index')}}">
                 <i class="fas fa-table"></i>
                 <span>الناشرون</span></a>
         </li>
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item {{ request()->is('admin/users*') ? 'active' : '' }}">
+        <!-- Nav Item - users -->
+        <li class="nav-item {{ request()->is('admin/users') ? 'active' : '' }}">
             <a class="nav-link text-right" href="{{route('users.index')}}">
                 <i class="fas fa-users"></i>
                 <span>المستخدمون</span></a>
+        </li>
+        
+        <li class="nav-item {{ request()->is('admin//allpurches') ? 'active' : '' }}">
+            <a class="nav-link text-right" href="{{route('all.purches')}}">
+                <i class="fas fa-shopping-bag"></i>
+                <span>{{__('المشتريات')}}</span></a>
         </li>
 
         <!-- Divider -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderMail;
+use App\Models\Shopping;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -70,5 +71,11 @@ class PurchaseController extends Controller
         $mybooks = auth()->user()->purchesProduct;
         $title = __('مشترياتي');
         return view('books.myproduct' , compact('mybooks' , 'title'));
+    }
+
+    public function allpurches(){
+        $allpurches = Shopping::with(['users' , 'books'])->where('bought' , true)->get();
+
+        return view('admin.books.allproducts' , compact('allpurches'));
     }
 }
